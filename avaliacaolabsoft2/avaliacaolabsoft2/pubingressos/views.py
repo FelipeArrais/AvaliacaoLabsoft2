@@ -14,3 +14,24 @@ def view_ingressos(request: HttpRequest):
 @api_view(['POST'])
 def compra_ingresso(request: HttpRequest) -> Response:
     body: dict = json.loads(request.body.decode('utf-8'))
+
+    fileira = body.get('fileira')
+    numero = body.get('numero')
+    ingressos = PubIngresso.objects.filter(fileira=fileira, numero=numero)
+
+    if len(ingressos) > 0:
+        ingresso = ingressos.first()
+        if ingresso.status == 0:
+            ingresso.status = 1
+            ingresso.save()
+            return Response({'success': True})
+        return Response({'success': False})
+    
+    PubIngresso.objects.create(
+        fileira=fileira,
+        numero=numero,
+        status=1
+    )
+    
+    return Response({'success': True})
+

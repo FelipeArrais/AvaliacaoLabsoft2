@@ -16,8 +16,9 @@ Including another URLconf
 """
 
 from django.urls import include, path
-from .PubIngressos.views import view_ingressos
+from .PubIngressos import views
 
 urlpatterns = [
-    path("", include('avaliacaolabsoft2.PubIngressos.urls'))
+    path('', views.view_ingressos, name='view_ingressos'),
+    path('compra', views.compra_ingresso, name='compra_ingresso')
 ]

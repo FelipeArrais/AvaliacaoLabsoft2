@@ -3,37 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingressos</title>
+    <title>Publisher Ingressos</title>
 </head>
 <body>
     <div>
-        <form action="{% url 'compra_ingresso' %}" method="POST">
-            {% csrf_token %}
+        <form action="{% url 'compra' %}" method="POST">
 
-            <h2>Compre seu ingresso:</h2>
-            <h3>
-                O estádio tem 100 lugares. Escolha quantos ingressos deseja e seus números identificadores
-            </h3>
+            <h1>Compre seu ingresso:</h1>
 
-            <label for="nome">Seu nome:</label>
-            <input name="nome" id="nome" required>
+            <label for="fileira">Fileira:</label>
+            <input name="fileira" id="fileira" required>
 
-            <br><br>
+            <br>
             
-            <label for="numero_ids">Escolha seus ingressos (utilize "Ctrl+click" para selecionar múltiplos ingressos):</label>
-            <select name="numero_ids" id="numero_ids" multiple required>
-                {% for ingresso in ingressos_disponiveis %}
-                    <option value="{{ingresso.numero}}">{{ingresso.numero}}</option>
-                {% endfor %}
-
-            </select> 
+            <label for="numero">Número:</label>
+            <input name="numero" id="numero" required>
 
             <br>
-            <br>
 
-            <button>Finalizar</button>
-
-            <br>
+            <button>Comprar</button>
 
         </form>
     </div>
